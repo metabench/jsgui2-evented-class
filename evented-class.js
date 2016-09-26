@@ -1,4 +1,4 @@
-var jsgui = require('./jsgui2-essentials');
+var jsgui = require('jsgui2-essentials');
 
 var j = jsgui;
 var Class = j.Class;
@@ -40,7 +40,7 @@ class Evented_Class {
     }
 
     'raise_event'() {
-        var a = arguments, a.l = a.length, sig = get_item_sig(a);
+        var a = arguments, sig = get_item_sig(a); a.l = a.length;
 
         // fp(function(a, sig)
         var that = this;
@@ -243,7 +243,7 @@ class Evented_Class {
     }
 
     'add_event_listener'() {
-        var a = arguments, a.l = a.length, sig = get_item_sig(a);
+        var a = arguments, sig = get_item_sig(a); a.l = a.length;
         // event listener for all events...
         //  that could work with delegation, and then when the code finds the event it interprets it.
         //console.log('');
