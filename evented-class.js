@@ -40,7 +40,22 @@ class Evented_Class {
     }
 
     'raise_event'() {
-        var a = arguments, sig = get_item_sig(a); a.l = a.length;
+
+        //
+
+        // need to change the way it gets the signature of the arguments.
+        //  treat array-like arguments as if they are an array.
+        //  get_arr_sig?
+
+
+
+
+
+        //console.log('arguments', arguments);
+
+        var a = Array.prototype.slice.call(arguments), sig = get_item_sig(a, 1); a.l = a.length;
+
+
 
         // fp(function(a, sig)
         var that = this;
@@ -94,6 +109,12 @@ class Evented_Class {
         // And s,a would be a value given as an array
         //  We don't have more properties, just a value.
 
+        // Seems to call more functions.
+        //  Not allowing an array to be the event object.
+
+
+
+
         if (sig == '[s,a]') {
             var be = this._bound_events;
 
@@ -141,6 +162,8 @@ class Evented_Class {
 
         if (sig == '[s,o]') {
             var be = this._bound_events;
+
+            //console.log('be', be);
 
             // And its general bound events as well.
             var bgh = this._bound_general_handler;
@@ -243,7 +266,7 @@ class Evented_Class {
     }
 
     'add_event_listener'() {
-        var a = arguments, sig = get_item_sig(a); a.l = a.length;
+        var a = Array.prototype.slice.call(arguments), sig = get_item_sig(a, 1); a.l = a.length;
         // event listener for all events...
         //  that could work with delegation, and then when the code finds the event it interprets it.
         //console.log('');
